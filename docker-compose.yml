@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: codeflow_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: codeflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    container_name: codeflow_redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
